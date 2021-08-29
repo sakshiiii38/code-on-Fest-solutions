@@ -1,0 +1,14 @@
+ int majorityElement(vector<int>& nums) {
+        if(nums.size()==1 || nums.size()==2) return nums[0];
+        map<int,int>freq;
+        for(int i=0;i<nums.size();i++){
+            freq[nums[i]]++;
+        }
+        int ans;
+        for(auto i:freq){
+            if(i.second>(nums.size()/2)){
+                ans=i.first;
+            }
+        }
+        return ans;
+    }
