@@ -1,0 +1,37 @@
+// i kept two pointers for traversing both the array individually
+// then one by one replacing the 0's of first array with the second array and then sorted that array
+
+// Approach - 01
+// time complexity - o(n + nlogn)
+// space complexty - o(1)
+void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        if(n==0){
+            return ;
+        }
+        for(int i=m,j=0;i<nums1.size() , j<nums2.size();i++,j++){
+            nums1[i]=nums2[j];
+        }
+        sort(nums1.begin(),nums1.end());
+    }
+    
+    /// Approach - 02
+    // as we know that both the arrays are sorted we can simply make two pointers traverse the array and compare the elments of one array to other
+    // time complexity  o(n)
+    //space complexity-o(1)
+   int i=n-1 , j=m-1;
+    while(i>=0 && j>=0){
+        if(A[i]<B[j]){
+            A[j+i+1] = B[j];
+            j--;
+        }
+        else{
+            A[i+j+1] = A[i];
+            i--;
+        }
+    }
+
+    while(j>=0){
+        A[j] = B[j];
+        j--;
+    }
+     
