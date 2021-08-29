@@ -1,0 +1,15 @@
+//Approach - 01
+//time complexity - o(nlogn)
+//space complexity- o(n)
+vector<int> sortedSquares(vector<int>& nums) {
+        vector<int>v;
+        for(auto i:nums){
+            v.push_back(i*i*1LL);
+        }
+        sort(v.begin(),v.end());
+        return v;
+    }
+    
+// Approach - 02
+// time complexity - o(n);
+//space complexity - o(1)
