@@ -1,0 +1,25 @@
+int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        int pre[n];
+        pre[n-1]=0;
+        for(int i =n-2;i>=0;i--){
+            pre[i]=max(pre[i+1],prices[i+1]);
+        }
+        int maxi[n];
+        maxi[n-1]=pre[n-1]+prices[n-1];
+        for(int i=n-2;i>=0;i--){
+            maxi[i]=max(maxi[i+1],pre[i+1]-prices[i+1]);
+        }
+        int ans=INT_MIN;
+        for(int i=0;i<n-2;i++){
+            for(int j=i+1;j<n-1;j++){
+                int profit=prices[j]-prices[i];
+                if(j+1<=n-1 && profit+maxi[j]>profit){
+                    profit+=maxi[j+1];
+                }
+                ans = max(ans,profit);
+            }
+        }
+        if(ans<=0) return 0;
+        return ans;
+    }
