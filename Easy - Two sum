@@ -1,0 +1,19 @@
+///my approach was :
+//i first traversed the array and insert each element in a map and then checked it target-element is prsent in a map
+// or not if it is present then this is my answer if it is not then continue traversing
+
+
+
+vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int>ans;
+        unordered_map<int,int>mpp;
+        for(int i=0;i<nums.size();i++){
+           if(mpp.find(target-nums[i]) !=mpp.end()){
+               ans.push_back(i);
+               ans.push_back(mpp[target-nums[i]]);
+               break;
+           }
+            mpp[nums[i]]=i;
+        }
+        return ans;
+    }
