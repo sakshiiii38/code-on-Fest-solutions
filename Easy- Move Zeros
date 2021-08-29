@@ -1,0 +1,20 @@
+int n=nums.size();
+        if(n==1) return;
+        else if(n==2 && nums[0]!=0) return;
+        else if(n==2 && nums[0]==0){
+            swap(nums[0],nums[1]);
+            return;
+        }
+        int i=0;
+        while(i<n-1){
+            int j=1+i;
+            if(nums[i]!=0) continue;
+            while(j<n && nums[j]==0){
+                if(j==n-1) break;
+                j++;
+            }
+           
+            swap(nums[i],nums[j]);
+            i++;
+        }
+    }
