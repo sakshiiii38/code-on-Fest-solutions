@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool f=false;
+    
+    void Solve(int i,int j,int k,int n,int m,vector<vector<char>>& board,string word){
+        if(i>=n or j>=m or i<0 or j<0 or k>= word.length() or board[i][j]!=word[k] or f==true)
+            return ;
+        
+        if(k==word.length()-1){
+            f=true;
+            return ;
+        } 
+        char temp=board[i][j];
+        board[i][j]='$';
+        Solve(i+1,j,k+1,n,m,board,word);
+          Solve(i,j+1,k+1,n,m,board,word);
+          Solve(i-1,j,k+1,n,m,board,word);
+          Solve(i,j-1,k+1,n,m,board,word);
+        board[i][j]=temp;
+        return;
+    }
+    bool exist(vector<vector<char>>& board, string word) {
+     int n=board.size();
+        int m=board[0].size();
+      for(int i=0;i<n;i++){
+          for(int j=0;j<m;j++){
+              Solve(i,j,0,n,m,board,word);
+          }
+      }
+        
+        return f;
+    }
+};
