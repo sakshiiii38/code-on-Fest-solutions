@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void func(int index , vector<int>&candidates , int target , vector<int>&ds , vector<vector<int>>&ans){
+        if(index == candidates.size()){
+            if(target==0){
+                ans.push_back(ds);
+            }
+            return;
+        }
+        
+        if(candidates[index]<=target){// if i pick that element
+            ds.push_back(candidates[index]);
+            func(index , candidates , target-candidates[index] , ds , ans);
+            ds.pop_back();
+        }
+        //if i not pick that element up
+        func(index+1 , candidates , target , ds , ans);
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int>ds;
+        vector<vector<int>>ans;
+        int index = 0 ;
+        func(index , candidates, target , ds , ans);
+        return ans;
+        
+    }
+};
