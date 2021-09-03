@@ -1,0 +1,49 @@
+class Solution {
+public:
+    vector<int>nsl;
+    vector<int>nsr;
+    void Nsl(vector<int>&heights){
+        stack<pair<int,int>>s;
+        for(int i=0;i<heights.size();i++){
+            while(s.size()>0 && heights[i]<=s.top().first){
+                s.pop();
+            }
+            if(s.size()==0){
+                nsl.push_back(-1);
+            }
+            else{
+                nsl.push_back(s.top().second);
+            }
+            s.push(make_pair(heights[i],i));
+        }
+    }
+    void Nsr(vector<int>&heights){
+        stack<pair<int,int>>s;
+        for(int i=heights.size()-1;i>=0;i--){
+            while(s.size()>0 && heights[i]<=s.top().first){
+                s.pop();
+            }
+            if(s.size()==0){
+                nsr.push_back(heights.size());
+            }
+            else{
+                nsr.push_back(s.top().second);
+            }
+            s.push(make_pair(heights[i],i));
+        }
+        reverse(nsr.begin(),nsr.end());
+    }
+    int largestRectangleArea(vector<int>& heights) {
+        Nsr(heights);
+        Nsl(heights);
+        int width[heights.size()];
+        for(int i=0;i<heights.size();i++){
+            width[i]=nsr[i]-nsl[i]-1;
+        }
+        int area=INT_MIN;
+        for(int i=0;i<heights.size();i++){
+            area = max(area,width[i]*heights[i]);
+        }
+        return area;
+    }
+};
